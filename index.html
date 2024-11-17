@@ -695,14 +695,7 @@
 			<label class="form-check-label" title="O ato de cometer o crime ja cometido anteriormente." for="Art.  15.3 - Réu Reincidente">Art. 15.3 - Réu Reincidente</label>
 		</div>
 		<hr>
-	
-<div class="col col-md-12">
-    <input id="Art. 15.7 - Bom Comportamento" type="checkbox" class="form-check-input" name="crime" value="-10|0|0" onclick="calcular()">
-    <label class="form-check-label" title="Reduz 10% da pena total por bom comportamento, aplicável apenas para advogado constituído."
-           for="Art. 15.7 - Bom Comportamento">Art. 15.7 - Bom Comportamento (10% de Redução)</label>
-</div>
-
-<h3>CRIMES MÉDIOS</h3>
+	<h3>CRIMES MÉDIOS</h3>
 	<div class="col col-md-12">
 			<input id="Art. 15.4 - Cúmplice" type="checkbox" class="form-check-input" name="crime" value="0|15000|0" onclick="calcular()">
 		<label class="form-check-label" title="Quem, dolosamente e por qualquer forma, prestar auxílio material ou moral à prática por outrem de um facto doloso." for="Art. 15.4 - Cúmplice">Art. 15.4 - Cúmplice</label>
@@ -815,7 +808,11 @@
 							<input type="checkbox" class="form-check-input" id="delacao-premiada" name="delacao-premiada">🔹 Delação premiada:<font color="#6f747a">Critério do
 								policial.</font>
 							</div>
-
+							<div class="col col-md-12 advogado-4" style="display: none;">
+								<h4>
+									<font color="#b50000"><input id="bom_comportamento" type="checkbox" class="form-check-input" value="30" name="bom-comportamento">🔹 Bom Comportamento:
+										<font color="#6f747a">Redução de 10% na pena total.
+							</font></font></h4></div><font color="#b50000"><font color="#6f747a">
 							<div class="col col-md-12 delacao" style="display: none;">
 								<font color="#b50000">
 									<div class="col col-md-12" style="padding-left: 5%;">
@@ -1449,3 +1446,29 @@
 
 
 </font></font></font></font></font></font></font></font></body></html>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const checkboxBomComportamento = document.getElementById('delacao-premiada');
+    if (checkboxBomComportamento) {
+        checkboxBomComportamento.addEventListener('change', function () {
+            calcularPena();
+        });
+    }
+});
+
+function calcularPena() {
+    let totalPena = parseFloat(document.getElementById('pena-total')?.innerText || 100); // Recupera a pena inicial
+    const bomComportamento = document.getElementById('delacao-premiada')?.checked;
+
+    // Aplicar redução para "Bom comportamento" se marcado
+    if (bomComportamento) {
+        totalPena *= 0.9; // Reduz 10%
+    }
+
+    // Atualizar o resultado no elemento apropriado
+    const resultadoElement = document.getElementById('resultado');
+    if (resultadoElement) {
+        resultadoElement.innerText = `Pena total: ${totalPena.toFixed(2)}`;
+    }
+}
+</script>
