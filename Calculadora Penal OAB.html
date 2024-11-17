@@ -7,15 +7,15 @@
 
 
 	
-	<link rel="stylesheet" href="./Calculadora Penal OAB_files/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<link rel="stylesheet" href="./Calculadora Penal OAB_files/bootstrap-icons.css">
-	<link rel="stylesheet" href="./Calculadora Penal OAB_files/style.css">
+	<link rel="stylesheet" href="./bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" href="./bootstrap-icons.css">
+	<link rel="stylesheet" href="./style.css">
 
 
 
 	<title>Calculadora Penal OAB</title>
 	</head><body class="fc"><div class="fc" style="text-align: center;">
-		<img src="./Calculadora Penal OAB_files/OAB.png" height="150px" width="auto">
+		<img src="./OAB.png" height="150px" width="auto">
 
 	</div>
 
@@ -808,7 +808,11 @@
 							<input type="checkbox" class="form-check-input" id="delacao-premiada" name="delacao-premiada">🔹 Delação premiada:<font color="#6f747a">Critério do
 								policial.</font>
 							</div>
-
+							<div class="col col-md-12 advogado-4" style="display: none;">
+								<h4>
+									<font color="#b50000"><input id="bom_comportamento" type="checkbox" class="form-check-input" value="30" name="bom-comportamento">🔹 Bom Comportamento:
+										<font color="#6f747a">Redução de 10% na pena total.
+							</font></font></h4></div><font color="#b50000"><font color="#6f747a">
 							<div class="col col-md-12 delacao" style="display: none;">
 								<font color="#b50000">
 									<div class="col col-md-12" style="padding-left: 5%;">
@@ -840,7 +844,7 @@
 <script type="text/javascript">(function () { window['__CF$cv$params'] = { r: '6d4ede693a774cf7', m: 'c1hW1Rh0H4tuZl0wsr8lc_PxHochVPe94cU5za3H6pc-1643421646-0-AZgReWNppiCIufGN9b0SQAKCqRsLtHcwRgDjgAZ+Ebwly7w0zsT9G6XS1O/UzoI0KiHefNZG3S1S37LGPme9exr6Q+bETOtZoXvE80b2jTfbfvhbNPPCZOseNmfBmgNt6A/HEo8div1AtL5xdFuLfRozIq3iNLhezke9DJu8FQdEnFcZ+SAUTYcHVynGr69bHeJn9/0I1C6Z2kVFP5+t1xjmrXaI1cyd880XCyhvg3kG', s: [0xa3d3168605, 0xba02de72f3], } })();</script>
 	<script type="text/javascript">(function () { window['__CF$cv$params'] = { r: '6d55320baf256030', m: 'ZIEu.pp.iZbUyq5KJvDLfjpPqMeOMxiNGM_gE_5Duyk-1643487986-0-AcUKQeDM0xlzizuzSCE1OWs4UCC/gTki/Wf/ptjXki9iQ5VGlYhrXoxDtlJyTdabd/omn/0PoOs+p2TFELZ2mXXA6xQBQ2b+78uInsszFfSZ930uS3lQhVc0pV+mm90Hi0ieWJJmSuym9EtYDi4CGxRFI1YKe+wVHyalMeXttvlzsYErYN8azcWTRNNeh5t9RbTkmCwQHWLPNxXvCr0wo0DuT9CtjXmfznyCLMi9IUpe', s: [0x6efed7905d, 0x60ab50310e], } })();</script>
 
-	<script src="./Calculadora Penal OAB_files/jquery.min.js.transferir"></script>
+	<script src="./jquery.min.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(async function () {
@@ -1442,3 +1446,29 @@
 
 
 </font></font></font></font></font></font></font></font></body></html>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const checkboxBomComportamento = document.getElementById('delacao-premiada');
+    if (checkboxBomComportamento) {
+        checkboxBomComportamento.addEventListener('change', function () {
+            calcularPena();
+        });
+    }
+});
+
+function calcularPena() {
+    let totalPena = parseFloat(document.getElementById('pena-total')?.innerText || 100); // Recupera a pena inicial
+    const bomComportamento = document.getElementById('delacao-premiada')?.checked;
+
+    // Aplicar redução para "Bom comportamento" se marcado
+    if (bomComportamento) {
+        totalPena *= 0.9; // Reduz 10%
+    }
+
+    // Atualizar o resultado no elemento apropriado
+    const resultadoElement = document.getElementById('resultado');
+    if (resultadoElement) {
+        resultadoElement.innerText = `Pena total: ${totalPena.toFixed(2)}`;
+    }
+}
+</script>
